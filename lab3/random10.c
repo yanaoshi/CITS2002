@@ -12,6 +12,25 @@ void fillArray(int *array, int size){
     }
 }
 
+int findMaximum(int *array, int size){
+    int maximum = array[0];
+    int maxIndex = 0;
+    for(int i = 0; i < size; i++){
+        if(maximum < array[i]){
+            maximum = array[i];
+            maxIndex = i;
+        }
+    }
+    for(int i = maxIndex; i > 0; i--){
+        array[i] = array[i - 1];
+    }
+     // Place the maximum value at the first position
+    array[0] = maximum;
+
+
+    return maximum;
+}
+
 
 int main(int argcount, char *argvalue[]){ 
     if (argcount != 1){
@@ -22,16 +41,22 @@ int main(int argcount, char *argvalue[]){
         int array[10];
         srand(time(NULL)); // seed the random number generator
         fillArray(array, 10);
-        int maximum = array[0]; // the program will return the maximum value in the array
+        
+        printf("Original array:\n");
         for(int i = 0; i < 10; i++){
             printf("%d\n", array[i]);
-            if(maximum < array[i]){ 
-                maximum = array[i];
-            }
         }
-        printf("Maximum: %d\n", maximum);
-        return 0;
+       
     
+        printf("The maximum value is %d\n", findMaximum(array, 10));
+        
 
-}
+        printf("Array after moving maximum to the front:\n");
+        for(int i = 0; i < 10; i++){
+            printf("%d\n", array[i]);
+        }
+
+    }
+    return 0;
+
 }
